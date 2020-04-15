@@ -83,13 +83,13 @@ Please Manually modify the following information.
 
 ```{r}
 # Location name
-location <- '研究大樓'
+location <- '醫護大樓'
 
 # File names for inner calls
 innerFileNames <- c('3011.csv','3022.csv','3023.csv')
 
 # File names for outer calls
-outerFileNames <- c('研究大樓.csv','研究大樓1015-1023.csv','研究大樓1024-1031.csv')
+outerFileNames <- c('醫護大樓1.csv', '醫護大樓2.csv')
 
 # Time interval for each time section
 sections <- c('07~10', '11~14', '15~19', '20~23')
