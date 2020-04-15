@@ -7,7 +7,12 @@ from ipywidgets import widgets
 import plotly.express as px
 
 import sys
+
 files_list = ['研究大樓','北棟病床梯','南棟電梯']
+
+#for range and bar width
+max_diff = 500
+split_num = 1
 
 df_arr = pd.DataFrame()
  
@@ -44,7 +49,7 @@ df_arr.sort_values(['is_b','floor','direction','timestamp'],ascending = [0,1,0,1
 
 ts1 = np.array(df_arr['timestamp'])
 ts2 = np.concatenate([[ts1[0]],ts1[:-1]])
-df_arr['time_diff'] = np.maximum(ts1-ts2,0)
+df_arr['time_diff'] = np.minimum(np.maximum(ts1-ts2,0),max_diff+2 * split_num)
 
 print(df_arr['time_diff'])
 
@@ -80,19 +85,17 @@ app.layout = html.Div([
 def update_figure(selected_building):
     
     fig = px.histogram(data_frame=df_arr[df_arr.building == selected_building], 
-             x = "time_diff",
+             x = "time_diff",histnorm='probability density',
              facet_col="direction",color="direction",
              animation_frame="floor",
-             labels={"count":"Frequency",
-                     "inter arrival time":" Time (sec)"},nbins = 5000)
+             labels={"count":"probability",
+                     "time_diff":"inter arrival time(s)"},nbins = max_diff/split_num + 2)
     #fig.update_xaxes(nticks=10)
-    #fig.update_xaxes(range=[0,100])
-    #fig.update_yaxes(range=[0, 500])
+    fig.update_xaxes(range=[0,max_diff])
+    fig.update_yaxes(range=[0, 0.04])
     fig.update_layout(title_text='Inter arrival time of Elevator Calls by Time')
     return fig
 
 
-
-
-
 app.run_server(debug=True, use_reloader=False)
+
