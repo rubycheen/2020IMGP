@@ -1,4 +1,4 @@
-from train import CNN, transform
+from train import  transform
 import torch
 import numpy as np
 
@@ -6,6 +6,8 @@ import numpy as np
 import cv2
 import numpy as np
 from PIL import Image
+
+from model_backup import CNN
 
 model = CNN()
 model.load_state_dict(torch.load('105.tdic'))
