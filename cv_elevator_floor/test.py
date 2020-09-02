@@ -10,7 +10,8 @@ from PIL import Image
 from model_backup import CNN
 
 model = CNN()
-model.load_state_dict(torch.load('105.tdic'))
+model.load_state_dict(torch.load('105.tdic',map_location=torch.device('cpu')))
+
 
 def cv2pil(img):
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
