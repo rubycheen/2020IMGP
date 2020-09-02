@@ -53,12 +53,12 @@ def beam(beam_size, prob_list):
 		i += 1
 	return old_list[0]
 
-def get_floor_list(path,beam_size=180):
+def get_floor_list(path, beam_size=180):
 	prob_list = get_prob_list(path)
 	print(prob_list)
 	return beam(beam_size,prob_list)
 
-def get_isOpen(floor_list):
+def get_is_open(floor_list):
 	start = 0
 	i = 1
 	isOpen = [0] * len(floor_list)

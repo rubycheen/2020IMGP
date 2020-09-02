@@ -30,13 +30,14 @@ class CNN(nn.Module): # first
 		super(CNN, self).__init__()
 		inp = 3
 		out = 6
-		self.conv1 = make_cnn2(3,6)#nn.Sequential(
+		self.conv1 = make_cnn2(3,6)
+		#nn.Sequential(
 		# 		nn.Conv2d(inp, out, 3,padding=1,padding_mode='circular'),
 		# 		nn.BatchNorm2d(out),
 		# 		nn.Conv2d(out, out, 3,padding=1,padding_mode='circular'),
 		# 		nn.BatchNorm2d(out),
 		# 		nn.LeakyReLU(),
-		# 		nn.MaxPool2d(kernel_size=2)
+				# nn.MaxPool2d(kernel_size=2)
 		# 		)
 		inp = 6
 		out = 12

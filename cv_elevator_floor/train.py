@@ -7,7 +7,9 @@ import numpy as np
 import torchvision
 from torchvision import datasets,transforms
 
-transform = transforms.Compose([transforms.Resize([13,13]),transforms.ToTensor()])
+# transform = transforms.Compose([transforms.Resize([13,13]),transforms.ToTensor()])
+transform = transforms.Compose([transforms.Resize([28,21]),transforms.ToTensor(),
+								transforms.Normalize([0.3911, 0.1931, 0.3122],[0.2666, 0.1464, 0.1864])])
 def data_loader(root, batch,train=True):
 	global transform
 	data = datasets.ImageFolder(root,transform=transform)
