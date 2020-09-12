@@ -8,23 +8,23 @@ import cv2
 import pandas
 from pandas.core.frame import DataFrame
 
-#影片輸入, 拿到資料
+#input video path and starting time
 source = "test.mp4"
 floor_frame = search.get_floor_list(source)
 is_open_frame = search.get_is_open(floor_frame[0])
 people_num_frame = numEstimate.det_people_num(is_open_frame, source = source)
-cctv_start_time = '2020-05-04 12:06:03' #這裡要手動輸入
+cctv_start_time = '2020-05-04 12:06:03' #input starting time here
 fps = len(is_open_frame)
 
-#單位轉換成秒數
+#adjust the unit from fps to sec
 people_num_per_sec = transform.frame_to_sec(people_num_frame , fps)
 floor_per_sec = transform.frame_to_sec(floor_frame[0], fps)
 is_open_per_sec = transform.frame_to_sec(is_open_frame, fps)
 
-#轉換樓層名稱
+#adjust the floor index
 floor_per_sec = transform.convert_floor(floor_per_sec)
 
-#產生時間戳
+#generate time stamp
 sec = len(floor_per_sec)
 time_stamp = transform.time_stamp(cctv_start_time, sec)
 
