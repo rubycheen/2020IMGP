@@ -2,7 +2,6 @@ import test
 import cv2
 #to be done
 
-
 def get_prob_list(path):
 	cap = cv2.VideoCapture(path)
 	ret = True
@@ -38,15 +37,12 @@ def beam(beam_size, prob_list):
 	old_list = [[ [], 0 ]]
 	prob_list_len = len(prob_list)
 	while i < prob_list_len:
-		print(i)
 		new_list = []
 		for l in old_list:
 			for j in range(18):
 				if check_validation(l[0], j):
 					tmp = l[0].copy()
 					tmp.append(j)
-					#print(l)
-					#print(prob_list)
 					new_list.append([tmp, l[1] + prob_list[i][j] ])
 		new_list.sort(reverse=True, key=lambda x: x[1])
 		old_list = new_list[:beam_size]
@@ -55,7 +51,6 @@ def beam(beam_size, prob_list):
 
 def get_floor_list(path, beam_size=180):
 	prob_list = get_prob_list(path)
-	print(prob_list)
 	return beam(beam_size,prob_list)
 
 def get_is_open(floor_list):
@@ -72,36 +67,10 @@ def get_is_open(floor_list):
 	return isOpen
 
 
-
-
 if __name__ == '__main__':
 	import json
 	file_list = ['../0.mov']
 	for f in file_list:
-		print(f)
-
-		# l = get_floor_list(f)
-		# json.dump(l,open(f + '.json','w'))
-
 		l = json.load(open(f + '.json'))
-
 		l = get_isOpen(l[0])
 		json.dump(l,open(f + '.open', 'w'))
-
-		
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-
-
-
